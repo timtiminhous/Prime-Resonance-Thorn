@@ -1,0 +1,10 @@
+GLOBAL:
+CCTK_REAL initial_amplitude "Amplitude of the Prime Field"
+{
+    *:* :: "Any real value"
+} 1.0
+
+CCTK_REAL pulse_width "Width of the initial Gaussian pulse (Prime Field)"
+{
+    *:* :: "Any real value"
+} 4.0
