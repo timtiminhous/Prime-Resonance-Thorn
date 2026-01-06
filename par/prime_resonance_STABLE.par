@@ -1,0 +1,72 @@
+# ==============================================================================
+# PRIME RESONANCE FIELD TEST: GRAVITATIONAL INTERFERENCE (CLEAN)
+# ==============================================================================
+
+# 1. ACTIVATION
+ActiveThorns = "
+    ADMBase 
+    StaticConformal
+    CoordBase 
+    CartGrid3D 
+    Boundary 
+    SymBase 
+    TmunuBase 
+    Time 
+    MoL 
+    IOUtil 
+    IOBasic 
+    IOASCII 
+    PrimeResonance
+    PUGH
+    PUGHSlab
+    PUGHReduce
+    LocalReduce
+"
+
+# 2. GRID SETUP
+PUGH::global_nx = 101
+PUGH::global_ny = 101
+PUGH::global_nz = 101
+
+CartGrid3D::type            = "coordbase"
+CartGrid3D::domain          = "full"
+CartGrid3D::avoid_origin    = "no"
+CoordBase::domainsize       = "minmax"
+CoordBase::xmin             = -10.0
+CoordBase::xmax             =  10.0
+CoordBase::ymin             = -10.0
+CoordBase::ymax             =  10.0
+CoordBase::zmin             = -10.0
+CoordBase::zmax             =  10.0
+CoordBase::dx               =  0.2
+CoordBase::dy               =  0.2
+CoordBase::dz               =  0.2
+
+# 3. TIME EVOLUTION
+Cactus::cctk_itlast         = 1000
+Time::dtfac                 = 0.05
+MoL::ODE_Method             = "RK4"
+MoL::MoL_Intermediate_Steps = 4
+MoL::MoL_Num_Scratch_Levels = 1
+
+# 4. PRIME FIELD PARAMETERS
+PrimeResonance::initial_amplitude = 1.0
+
+# 5. OUTPUT
+# The Master Directory (All output goes here)
+IOUtil::out_dir             = "prime_sim_output"
+IOUtil::out_fileinfo        = "none"
+
+# Screen Output (Info)
+IOBasic::outInfo_every      = 10
+IOBasic::outInfo_vars       = "PrimeResonance::phi"
+# Removed invalid 'outInfo_dir'
+
+# File Output (ASCII)
+IOASCII::out1D_every        = 10
+IOASCII::out1D_vars         = "
+    PrimeResonance::phi 
+    TmunuBase::eTtt
+    TmunuBase::eTxx
+"
+# Removed redundant 'out1D_dir' (Inherits from IOUtil)

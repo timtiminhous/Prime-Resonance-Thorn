@@ -1,0 +1,6 @@
+*.xg
+*.asc
+*.o
+exe/
+prime_sim_output/
+configs/

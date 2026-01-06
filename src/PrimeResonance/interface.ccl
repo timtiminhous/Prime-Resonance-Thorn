@@ -1,0 +1,14 @@
+implements: PrimeResonance
+inherits: ADMBase TmunuBase Grid
+
+CCTK_REAL prime_field TYPE=GF TIMELEVELS=3 TAGS='tensortypealias="Scalar"'
+{
+  phi
+  phi_t
+} "The Prime Resonance Scalar Field"
+
+CCTK_REAL prime_field_rhs TYPE=GF TIMELEVELS=1 TAGS='tensortypealias="Scalar"'
+{
+  phi_rhs
+  phi_t_rhs
+} "RHS for Prime Field Evolution"
